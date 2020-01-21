@@ -17,6 +17,7 @@ public class PhysicsRBody : MonoBehaviour
     private Vector2 totalForces;                        
     private PhysicsEngine engine;
 
+
     public struct AABB
     {
         public Vector2 bLeft;
@@ -98,5 +99,10 @@ public class PhysicsRBody : MonoBehaviour
         SetAABB();
 
         totalForces = Vector2.zero;
+    }
+
+    private void Update()
+    {
+        Integrate(Time.deltaTime);
     }
 }

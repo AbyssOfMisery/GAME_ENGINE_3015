@@ -10,7 +10,7 @@ public class PhysicsEngine : MonoBehaviour
         public PhysicsRBody rigidBodyA;
         public PhysicsRBody rigidBodyB;
     }
-
+    
     public struct CollisionInfo{
         public Vector2 collisionNormal;
         public float penetration;
@@ -18,6 +18,8 @@ public class PhysicsEngine : MonoBehaviour
 
     private Dictionary<CollisionPair, CollisionInfo> collisions = new Dictionary<CollisionPair, CollisionInfo>();
     private List<PhysicsRBody> rigidBodies = new List<PhysicsRBody>();
+
+
 
     public void AddRigidBody(PhysicsRBody rigidBody){
         rigidBodies.Add(rigidBody);
@@ -59,7 +61,8 @@ public class PhysicsEngine : MonoBehaviour
                     Vector2 gap = new Vector2(Mathf.Abs(distance.x), Mathf.Abs(distance.y)) - (halfSizeA + halfSizeB);
 
                     // Seperating Axis Theorem test
-                    if (gap.x < 0 && gap.y < 0){                                                 
+                    if (gap.x < 0 && gap.y < 0){
+              
                         Debug.Log("Collided!!!");
 
                         if (collisions.ContainsKey(pair)){
@@ -69,18 +72,22 @@ public class PhysicsEngine : MonoBehaviour
                         if (gap.x > gap.y){
                             if (distance.x > 0){
                                 // ... Update collision normal
+                              
                             }
                             else{
                                 // ... Update collision normal
+                               
                             }                                
                             colInfo.penetration = gap.x;    
                         }
                         else{
                             if (distance.y > 0){
                                 // ... Update collision normal
+                                
                             }                              
                             else{
                                 // ... Update collision normal
+                               
                             }
                             colInfo.penetration = gap.y; 
                         }                                 
@@ -95,7 +102,6 @@ public class PhysicsEngine : MonoBehaviour
             }
         }
     }
-
     void ResolveCollisions(){
         foreach (CollisionPair pair in collisions.Keys){
             float minBounce = Mathf.Min(pair.rigidBodyA.bounciness, pair.rigidBodyB.bounciness);
@@ -157,6 +163,8 @@ public class PhysicsEngine : MonoBehaviour
 
     void UpdatePhysics(){
         // .... 
+        ResolveCollisions();
+        CheckCollisions();
     }
 
     // Update is called once per frame
