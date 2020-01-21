@@ -62,7 +62,8 @@ public class PhysicsEngine : MonoBehaviour
 
                     // Seperating Axis Theorem test
                     if (gap.x < 0 && gap.y < 0){
-              
+
+                        
                         Debug.Log("Collided!!!");
 
                         if (collisions.ContainsKey(pair)){
@@ -72,22 +73,25 @@ public class PhysicsEngine : MonoBehaviour
                         if (gap.x > gap.y){
                             if (distance.x > 0){
                                 // ... Update collision normal
-                              
+                               
+                                colInfo.collisionNormal = new Vector2(10,0);
+                                Debug.Log(colInfo.collisionNormal);
                             }
                             else{
                                 // ... Update collision normal
-                               
+                             
+                                colInfo.collisionNormal = new Vector2(-10, 0);
                             }                                
                             colInfo.penetration = gap.x;    
                         }
                         else{
                             if (distance.y > 0){
                                 // ... Update collision normal
-                                
+                                colInfo.collisionNormal = new Vector2(0, 10);
                             }                              
                             else{
                                 // ... Update collision normal
-                               
+                                colInfo.collisionNormal = new Vector2(0, -10);
                             }
                             colInfo.penetration = gap.y; 
                         }                                 

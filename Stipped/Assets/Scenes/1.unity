@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870278572445348d9b0106382aa964d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundedTol: 1
+  groundedTol: -34.47
 --- !u!4 &1188850213
 Transform:
   m_ObjectHideFlags: 0
