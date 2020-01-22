@@ -46,6 +46,12 @@ public class PhysicsRBody : MonoBehaviour
 
     /*
      * ______________ <-What does this function do?
+     * To set up a size of box in this function
+     * 
+     * This form allows an AABB to be represented by two points. 
+     * The min point represents the lower bounds of the x and y axis, 
+     * and max represents the higher bounds - in other words, 
+     * they represent the top left and bottom right corners.
      */
     void SetAABB()
     {
@@ -70,6 +76,9 @@ public class PhysicsRBody : MonoBehaviour
 
     /*
      * ______________ Describe how this function works
+     * This function is updating forces
+     * and calculating mess
+     * and reset forces
      */
     public void Integrate(float dT){
         Vector2 acceleration = new Vector2();

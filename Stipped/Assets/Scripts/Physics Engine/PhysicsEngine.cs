@@ -100,9 +100,9 @@ public class PhysicsEngine : MonoBehaviour
                             }
                             colInfo.penetration = gap.y; 
                         }
-                        
-                        collisions.Add(pair, colInfo);
                         ResolveCollisions();
+                        collisions.Add(pair, colInfo);
+                        
                     }
                     else if (collisions.ContainsKey(pair)){
                         Debug.Log("removed");  
@@ -143,7 +143,7 @@ public class PhysicsEngine : MonoBehaviour
 
 
             if (Mathf.Abs(collisions[pair].penetration) > 0.01f){
-                //PositionalCorrection(pair);
+                PositionalCorrection(pair);
             }
            
         }
@@ -152,6 +152,15 @@ public class PhysicsEngine : MonoBehaviour
     /*
     * ______________ Why do we need this function? 
     * ______________ Try taking it out and see what happens
+    * 
+    * It will do nothing for now because they have same size and slow speed
+    * But this function is use to prevent object sinking. 
+    * The problem of sinking objects arises when something starts sinking into another object due to gravity. 
+    * Perhaps something with low restitution hits a wall with infinite mass and begins to sink.
+    * 
+    * This sinking is due to floating point errors. During each floating point calculation a small floating point error is introduced due to hardware. 
+    * (For more information, Google [Floating point error IEEE754].) 
+    * Over time this error accumulates in positional error, causing objects to sink into one another.
     */
     void PositionalCorrection(CollisionPair c){
         const float percent = 0.2f;
