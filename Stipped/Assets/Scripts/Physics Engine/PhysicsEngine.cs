@@ -76,12 +76,12 @@ public class PhysicsEngine : MonoBehaviour
                             if (distance.x > 0){
                                 // ... Update collision normal
 
-                                colInfo.collisionNormal = new Vector2(-1, 0);
+                                colInfo.collisionNormal = new Vector2(1, 0);
                                 Debug.Log("1"+colInfo.collisionNormal);
                             }
                             else{
                                 // ... Update collision normal
-                                colInfo.collisionNormal = new Vector2(0, 0);
+                                colInfo.collisionNormal = new Vector2(-1,0);
                                 Debug.Log("2" + colInfo.collisionNormal);
                                 
                             }                                
@@ -100,9 +100,9 @@ public class PhysicsEngine : MonoBehaviour
                             }
                             colInfo.penetration = gap.y; 
                         }
-                        ResolveCollisions();
-                        collisions.Add(pair, colInfo);
                         
+                        collisions.Add(pair, colInfo);
+                        ResolveCollisions();
                     }
                     else if (collisions.ContainsKey(pair)){
                         Debug.Log("removed");  
