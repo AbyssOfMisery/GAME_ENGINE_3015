@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PhysicsEngine : MonoBehaviour
 {
+  
     public float groundedTol = 0.1f;
 
     public struct CollisionPair{
@@ -51,7 +52,8 @@ public class PhysicsEngine : MonoBehaviour
                 if (bodyA != bodyB){
                     CollisionPair pair = new CollisionPair();
                     CollisionInfo colInfo = new CollisionInfo();
-                    pair.rigidBodyA = bodyA; pair.rigidBodyB = bodyB;
+                    pair.rigidBodyA = bodyA;
+                    pair.rigidBodyB = bodyB;
 
                     Vector2 distance = bodyB.transform.position - bodyA.transform.position;
 
@@ -63,7 +65,7 @@ public class PhysicsEngine : MonoBehaviour
                     // Seperating Axis Theorem test
                     if (gap.x < 0 && gap.y < 0){
 
-                        
+                       
                         Debug.Log("Collided!!!");
 
                         if (collisions.ContainsKey(pair)){
@@ -73,35 +75,40 @@ public class PhysicsEngine : MonoBehaviour
                         if (gap.x > gap.y){
                             if (distance.x > 0){
                                 // ... Update collision normal
-                               
-                                colInfo.collisionNormal = new Vector2(10,0);
-                                Debug.Log(colInfo.collisionNormal);
+
+                                colInfo.collisionNormal = new Vector2(-1, 0);
+                                Debug.Log("1"+colInfo.collisionNormal);
                             }
                             else{
                                 // ... Update collision normal
-                             
-                                colInfo.collisionNormal = new Vector2(-10, 0);
+                                colInfo.collisionNormal = new Vector2(0, 0);
+                                Debug.Log("2" + colInfo.collisionNormal);
+                                
                             }                                
                             colInfo.penetration = gap.x;    
                         }
                         else{
                             if (distance.y > 0){
                                 // ... Update collision normal
-                                colInfo.collisionNormal = new Vector2(0, 10);
+                                colInfo.collisionNormal = new Vector2(0,1);
+                                Debug.Log("3" + colInfo.collisionNormal);
                             }                              
                             else{
                                 // ... Update collision normal
-                                colInfo.collisionNormal = new Vector2(0, -10);
+                                colInfo.collisionNormal = new Vector2(0,-1);
+                                Debug.Log("4" + colInfo.collisionNormal);
                             }
                             colInfo.penetration = gap.y; 
-                        }                                 
+                        }
+                        
                         collisions.Add(pair, colInfo);
+                        ResolveCollisions();
                     }
                     else if (collisions.ContainsKey(pair)){
-                        Debug.Log("removed");
+                        Debug.Log("removed");  
                         collisions.Remove(pair);
                     }
-
+                    
                 }
             }
         }
@@ -110,6 +117,9 @@ public class PhysicsEngine : MonoBehaviour
         foreach (CollisionPair pair in collisions.Keys){
             float minBounce = Mathf.Min(pair.rigidBodyA.bounciness, pair.rigidBodyB.bounciness);
             float velAlongNormal = Vector2.Dot(pair.rigidBodyB.currentVelocity - pair.rigidBodyA.currentVelocity, collisions[pair].collisionNormal);
+            //pair.rigidBodyA.Stop();
+            //pair.rigidBodyB.Stop();
+            Debug.Log(collisions[pair].collisionNormal);
             if (velAlongNormal > 0) continue;
 
             float j = -(1 + minBounce) * velAlongNormal;
@@ -118,7 +128,6 @@ public class PhysicsEngine : MonoBehaviour
                 invMassA = 0;
             else
                 invMassA = 1 / pair.rigidBodyA.mass;
-
             if (pair.rigidBodyB.mass == 0)
                 invMassB = 0;
             else
@@ -129,10 +138,14 @@ public class PhysicsEngine : MonoBehaviour
             Vector2 impulse = j * collisions[pair].collisionNormal;
 
             // ... update velocities
+            pair.rigidBodyA.currentVelocity -= invMassA * impulse;
+            pair.rigidBodyB.currentVelocity += invMassB * impulse;
+
 
             if (Mathf.Abs(collisions[pair].penetration) > 0.01f){
-                PositionalCorrection(pair);
+                //PositionalCorrection(pair);
             }
+           
         }
     }
 
@@ -167,8 +180,9 @@ public class PhysicsEngine : MonoBehaviour
 
     void UpdatePhysics(){
         // .... 
-        ResolveCollisions();
+        IntegrateBodies(Time.deltaTime);
         CheckCollisions();
+      
     }
 
     // Update is called once per frame

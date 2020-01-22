@@ -414,7 +414,7 @@ MonoBehaviour:
   bounciness: 0.8
   obeysGravity: 0
   gravity: {x: 0, y: -9.8}
-  currentVelocity: {x: -10, y: 0}
+  currentVelocity: {x: -3, y: 0}
   maxVelocity: {x: 10, y: 10}
   grounded: 0
 --- !u!23 &1030576810
@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 870278572445348d9b0106382aa964d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundedTol: -34.47
+  groundedTol: 1
 --- !u!4 &1188850213
 Transform:
   m_ObjectHideFlags: 0
@@ -645,7 +645,7 @@ MonoBehaviour:
   bounciness: 0.8
   obeysGravity: 0
   gravity: {x: 0, y: -9.8}
-  currentVelocity: {x: 10, y: 0}
+  currentVelocity: {x: 3, y: 0}
   maxVelocity: {x: 10, y: 10}
   grounded: 0
 --- !u!1 &1255770176

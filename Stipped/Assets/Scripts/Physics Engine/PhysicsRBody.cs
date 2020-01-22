@@ -100,9 +100,4 @@ public class PhysicsRBody : MonoBehaviour
 
         totalForces = Vector2.zero;
     }
-
-    private void Update()
-    {
-        Integrate(Time.deltaTime);
-    }
 }
