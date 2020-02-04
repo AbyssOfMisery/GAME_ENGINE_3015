@@ -9,7 +9,7 @@ https://stackoverflow.com/questions/1243614/how-do-i-calculate-the-normal-vector
 https://gamedevelopment.tutsplus.com/tutorials/how-to-create-a-custom-2d-physics-engine-the-basics-and-impulse-resolution--gamedev-6331
 
 #normal vertors
-*1. new Vector2(1, 0);
-*2. new Vector2(-1,0);
-*3. new Vector2(0,1);
-*4. new Vector2(0,-1);
+* 1. new Vector2(1, 0);
+* 2. new Vector2(-1,0);
+* 3. new Vector2(0,1);
+* 4. new Vector2(0,-1);
