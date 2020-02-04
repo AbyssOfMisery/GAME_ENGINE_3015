@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d64908d14a5a475c9dae3e9f48f20dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 20
+  mass: 1
   bounciness: 0.8
   obeysGravity: 0
   gravity: {x: 0, y: -9.8}

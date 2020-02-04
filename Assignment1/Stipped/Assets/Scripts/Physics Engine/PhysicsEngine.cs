@@ -6,7 +6,7 @@ public class PhysicsEngine : MonoBehaviour
 {
   
     public float groundedTol = 0.1f;
-
+  
     public struct CollisionPair{
         public PhysicsRBody rigidBodyA;
         public PhysicsRBody rigidBodyB;
@@ -189,7 +189,8 @@ public class PhysicsEngine : MonoBehaviour
 
     void UpdatePhysics(){
         // .... 
-        IntegrateBodies(Time.deltaTime);
+        float dt = Time.deltaTime;
+        IntegrateBodies(dt);
         CheckCollisions();
       
     }
